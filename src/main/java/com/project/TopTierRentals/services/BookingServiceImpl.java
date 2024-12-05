@@ -8,28 +8,37 @@ import com.project.TopTierRentals.dtos.response.BookingResponse;
 import com.project.TopTierRentals.dtos.response.BookingUpdateResponse;
 import com.project.TopTierRentals.exceptions.BookingCancellationException;
 import com.project.TopTierRentals.exceptions.NotSuccessfulException;
+import com.project.TopTierRentals.exceptions.ProductNotFoundException;
 import com.project.TopTierRentals.models.Booking;
 import com.project.TopTierRentals.models.PaymentStatus;
 import com.project.TopTierRentals.models.Product;
 import com.project.TopTierRentals.models.RentalStatus;
 import com.project.TopTierRentals.repositories.BookingRepository;
+import com.project.TopTierRentals.repositories.ProductRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Service
 @AllArgsConstructor
 public class BookingServiceImpl implements BookingService {
 
+    public static final int NO_IN_STOCK = 10;
+
     @Autowired
     private BookingRepository bookingRepository;
+    @Autowired
+    private ProductRepository productRepository;
+
 
     @Override
     public BookingResponse createBooking(BookingRequest request) throws NotSuccessfulException {
         Booking booking = new Booking();
+        validateStock(request.getNoInStock());
         paymentStatusValidation(request.getPaymentStatus());
         rentalStatusValidation(request.getBookingStatus());
         booking.setCustomerName(request.getCustomerName());
@@ -39,6 +48,7 @@ public class BookingServiceImpl implements BookingService {
         booking.setEndDateAndTime(request.getEndDateAndTime().plusDays(2));
         booking.setBookingStatus(request.getBookingStatus());
         booking.setBookingLocation(request.getBookingLocation());
+        booking.setNoInStock(request.getNoInStock());
         booking.setProductName(request.getProductName());
         bookingRepository.save(booking);
         BookingResponse bookingResponse = new BookingResponse();
@@ -50,6 +60,16 @@ public class BookingServiceImpl implements BookingService {
         bookingResponse.setBookingStatus(booking.getBookingStatus());
         bookingResponse.setBookingLocation(booking.getBookingLocation());
         return bookingResponse;
+    }
+
+    public void validateStock(int noInStock){
+        List<Product> numberAvailable = productRepository.findByNoInStock(noInStock);
+        if(NO_IN_STOCK == 0){
+            throw new ProductNotFoundException("Product unavailable");
+        }
+        if(numberAvailable.size() > NO_IN_STOCK){
+            throw new ProductNotFoundException("more than quantity in stock");
+        }
     }
 
     @Override

@@ -4,6 +4,7 @@ import com.project.TopTierRentals.dtos.request.BookingRequest;
 import com.project.TopTierRentals.dtos.request.CustomerLoginRequest;
 import com.project.TopTierRentals.dtos.request.CustomerRegisterRequest;
 import com.project.TopTierRentals.dtos.request.SearchProductRequest;
+import com.project.TopTierRentals.dtos.response.BookingResponse;
 import com.project.TopTierRentals.dtos.response.CustomerLoginResponse;
 import com.project.TopTierRentals.dtos.response.CustomerRegisterResponse;
 import com.project.TopTierRentals.dtos.response.SearchProductResponse;
@@ -16,7 +17,9 @@ public interface CustomerService {
 
     SearchProductResponse searchProduct(String productName);
 
-    List<Booking> createBooking(BookingRequest bookingRequest);
+//    List<Booking> createBooking(BookingRequest bookingRequest);
+
+    List<Booking> createBooking(BookingRequest request) ;
 
     CustomerRegisterResponse registerCustomer(CustomerRegisterRequest request);
 
@@ -25,4 +28,6 @@ public interface CustomerService {
     List<Product> getProductByPrice(SearchProductRequest searchProductRequest);
 
     List<Product> findProductByLocation(SearchProductRequest request);
+
+    List<Product> findProductByNameAndCreateBooking(SearchProductRequest request);
 }

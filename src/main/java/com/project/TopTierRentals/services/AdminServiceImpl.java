@@ -37,6 +37,11 @@ public class AdminServiceImpl implements AdminService {
     public AddProductResponse addProduct(AddProductRequest addProductRequest) {
         productService.addProduct(addProductRequest);
         AddProductResponse addProductResponse = new AddProductResponse();
+        addProductResponse.setProductName(addProductRequest.getProductName());
+        addProductResponse.setProductDescription(addProductRequest.getProductDescription());
+        addProductResponse.setProductPrice(addProductRequest.getProductPrice());
+        addProductResponse.setProductQuantity(addProductRequest.getProductQuantity());
+        addProductResponse.setVendorId(addProductRequest.getVendorId());
         addProductResponse.setMessage("Product added successfully");
         return addProductResponse;
     }

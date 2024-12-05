@@ -24,6 +24,7 @@ public class ProductServiceImpl implements ProductService{
     @Override
     public AddProductResponse addProduct(AddProductRequest addProductRequest) {
         Product product = new Product();
+//        validateStock(addProductRequest.getNoInStock());
         product.setProductName(addProductRequest.getProductName());
         product.setProductDescription(addProductRequest.getProductDescription());
         product.setProductPrice(addProductRequest.getProductPrice());
@@ -32,11 +33,13 @@ public class ProductServiceImpl implements ProductService{
         product.setProductQuantity(addProductRequest.getProductQuantity());
         product.setVendorId(addProductRequest.getVendorId());
         product.setLocation(addProductRequest.getLocation());
+        product.setNoInStock(addProductRequest.getNoInStock());
         productRepository.save(product);
         AddProductResponse addProductResponse = new AddProductResponse();
         addProductResponse.setMessage("Product added successfully");
         return addProductResponse;
     }
+
 
     @Override
     public SearchProductResponse searchProductByName(String productName) {

@@ -45,6 +45,7 @@ public class BookingServiceTest {
         request.setEndDateAndTime(LocalDateTime.now().plusDays(3));
         request.setPaymentStatus(PaymentStatus.COMPLETED);
         request.setBookingStatus(RentalStatus.COMPLETED);
+        request.setNoInStock(1);
         request.setOrders(request.getOrders());
         request.setProductName("book");
         BookingResponse response = bookingService.createBooking(request);

@@ -77,7 +77,7 @@ public class CustomerServicesTest {
     public void testUserCanBookProduct(){
         BookingRequest request = new BookingRequest();
         request.setProductName("test");
-        List<Booking> response = customerService.createBooking(request);
+        List<Booking> response = (List<Booking>) customerService.createBooking(request);
         assertNotNull(response);
     }
 
@@ -101,7 +101,16 @@ public class CustomerServicesTest {
         request.setPassword("test");
         CustomerLoginResponse response = customerService.CustomerLogin(request);
         assertNotNull(response);
+    }
 
+    @Test
+    public void testFindProductByName(){
+        SearchProductRequest request = new SearchProductRequest();
+        request.setProductName("test");
+        request.setProductPrice(new BigDecimal("1500.00"));
+        List<Product> response = customerService.findProductByNameAndCreateBooking(request);
+        assertNotNull(response);
+        assertEquals(response.size(), 2);
     }
 
 }

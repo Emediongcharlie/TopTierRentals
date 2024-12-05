@@ -20,6 +20,7 @@ public class BookingRequest {
     private String customerName;
     private LocalDateTime startDateAndTime;
     private LocalDateTime endDateAndTime;
+    private int noInStock;
     private String bookingLocation;
     private RentalStatus bookingStatus;
     private PaymentStatus paymentStatus;

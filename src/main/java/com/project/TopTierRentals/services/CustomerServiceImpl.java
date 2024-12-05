@@ -4,11 +4,13 @@ import com.project.TopTierRentals.dtos.request.BookingRequest;
 import com.project.TopTierRentals.dtos.request.CustomerLoginRequest;
 import com.project.TopTierRentals.dtos.request.CustomerRegisterRequest;
 import com.project.TopTierRentals.dtos.request.SearchProductRequest;
+import com.project.TopTierRentals.dtos.response.BookingResponse;
 import com.project.TopTierRentals.dtos.response.CustomerLoginResponse;
 import com.project.TopTierRentals.dtos.response.CustomerRegisterResponse;
 import com.project.TopTierRentals.dtos.response.SearchProductResponse;
 import com.project.TopTierRentals.exceptions.EmailValidationException;
-import com.project.TopTierRentals.models.Admin;
+import com.project.TopTierRentals.exceptions.NotSuccessfulException;
+import com.project.TopTierRentals.exceptions.ProductNotFoundException;
 import com.project.TopTierRentals.models.Booking;
 import com.project.TopTierRentals.models.Customer;
 import com.project.TopTierRentals.models.Product;
@@ -45,11 +47,13 @@ public class CustomerServiceImpl implements CustomerService{
         return response;
     }
 
-    @Override
-    public List<Booking> createBooking(BookingRequest bookingRequest) {
+    public List<Booking> createBooking(BookingRequest request) {
         List<Booking> bookings = new ArrayList<>();
         for(Booking booking : bookingRepository.findAll()) {
-            if (booking.getProductName().equals(bookingRequest.getProductName())) {
+            if (booking.getProductName().equals(request.getProductName())) {
+                BookingResponse response = new BookingResponse();
+                response.setCustomerName(response.getCustomerName());
+                response.setBookingAmount(request.getBookingAmount());
                 bookings.add(booking);
             }
         }
@@ -118,5 +122,16 @@ public class CustomerServiceImpl implements CustomerService{
         }
         return productLocation;
     }
+
+    public List<Product> findProductByNameAndCreateBooking(SearchProductRequest request){
+        List <Product> findAndCreateByName = new ArrayList<>();
+        for(Product product : productRepository.findAll()){
+            if(product.getProductName().equals(request.getProductName())) {
+                findAndCreateByName.add(product);
+            }
+        }
+        return  findAndCreateByName;
+    }
+
 
 }

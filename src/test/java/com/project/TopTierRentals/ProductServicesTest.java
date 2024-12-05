@@ -31,7 +31,7 @@ public class ProductServicesTest {
         addProductRequest.setProductName("test");
         addProductRequest.setProductDescription("Test");
         addProductRequest.setProductPrice(new BigDecimal(1500.0));
-        addProductRequest.setProductQuantity(5);
+        addProductRequest.setProductQuantity(1);
         addProductRequest.setAvailability(true);
         addProductRequest.setProductCondition(ProductCondition.GOOD);
         addProductRequest.setNoInStock(10);

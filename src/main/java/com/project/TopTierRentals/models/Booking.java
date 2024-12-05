@@ -27,5 +27,6 @@ public class Booking {
     @OneToMany
     private List<ProductOrder> orders;
     private String productName;
+    private int noInStock;
 
 }
