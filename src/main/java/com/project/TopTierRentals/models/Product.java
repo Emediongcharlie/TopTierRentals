@@ -7,9 +7,9 @@ import lombok.Setter;
 import java.math.BigDecimal;
 import java.util.List;
 
-@Entity
 @Getter
 @Setter
+@Entity
 public class Product {
 
     @Id
@@ -19,13 +19,12 @@ public class Product {
     private String productDescription;
     private BigDecimal productPrice;
     private int productQuantity;
-    private Boolean Availability;
-    private String Category;
-    private Condition condition;
-    @OneToMany
-    private List<Vendor> vendor;
-    @OneToMany
-    private List<Inventory> inventoryCount;
-
-
+    private boolean availability;
+    private String category;
+    private ProductCondition productCondition;
+//    @OneToOne
+    private Long vendorId;
+    private String vendorName;
+    private String location;
+    private int noInStock;
 }

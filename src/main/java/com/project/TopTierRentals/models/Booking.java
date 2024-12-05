@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -14,17 +15,17 @@ public class Booking {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int bookingID;
-    private int customerID;
+    private Long bookingID;
+    private Long customerID;
     private String customerName;
-    private String startDateAndTime;
-    private String endDateAndTime;
+    private LocalDateTime startDateAndTime;
+    private LocalDateTime endDateAndTime;
     private String bookingLocation;
     private RentalStatus bookingStatus;
     private PaymentStatus paymentStatus;
-    private String bookingType;
     private BigDecimal bookingAmount;
     @OneToMany
-    private List<Product> product;
+    private List<ProductOrder> orders;
+    private String productName;
 
 }

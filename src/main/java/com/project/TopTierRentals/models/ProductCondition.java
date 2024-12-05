@@ -1,6 +1,6 @@
 package com.project.TopTierRentals.models;
 
-public enum Condition {
+public enum ProductCondition {
 
     NEW,
     GOOD,

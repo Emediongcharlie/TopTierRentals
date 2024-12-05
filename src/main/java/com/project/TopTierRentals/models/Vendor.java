@@ -1,18 +1,22 @@
 package com.project.TopTierRentals.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter@Setter@Entity
+import java.util.List;
+
+@Getter@Setter
+@Entity
 public class Vendor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int vendorId;
+    private Long vendorId;
     private String email;
     private String vendorName;
+    @OneToMany
+    private List<Product> listProduct;
+    private String vendorAddress;
+    private String vendorPassword;
 }

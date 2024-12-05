@@ -11,9 +11,10 @@ public class Inventory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int inventoryId;
-    @ManyToMany
-    private List<Product> productId;
-    private String quantity;
+    private Long inventoryId;
+    @OneToMany
+    private List<Vendor> vendorProduct;
+    private int quantity;
     private String storeLocation;
+    private String customerId;
 }

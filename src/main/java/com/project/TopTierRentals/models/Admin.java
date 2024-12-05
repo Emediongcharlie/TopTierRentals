@@ -14,6 +14,7 @@ public class Admin {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
-    private String Name;
-    private String Email;
+    private String name;
+    private String email;
+    private String Password;
 }

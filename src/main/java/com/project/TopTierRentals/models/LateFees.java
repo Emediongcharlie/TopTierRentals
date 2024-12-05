@@ -14,7 +14,7 @@ public class LateFees {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     private String customerId;
     private BigDecimal lateFee;
     private String message;

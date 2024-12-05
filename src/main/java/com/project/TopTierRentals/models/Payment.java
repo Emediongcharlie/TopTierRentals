@@ -15,9 +15,9 @@ public class Payment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int paymentId;
-    private int customerId;
-    private int RentalId;
+    private Long paymentId;
+    private Long customerId;
+    private Long RentalId;
     private String paymentDate;
     private BigDecimal paymentAmount;
     private PaymentStatus paymentStatus;
