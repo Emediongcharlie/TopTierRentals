@@ -27,6 +27,8 @@ import java.util.Optional;
 @Transactional
 public class AdminServiceImpl implements AdminService {
 
+    private static final int NO_IN_STOCK = 20;
+
     @Autowired
     private ProductService productService;
     @Autowired
